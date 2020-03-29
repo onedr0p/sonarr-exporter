@@ -1,5 +1,33 @@
 # sonarr-exporter
 
+Prometheus Exporter for Sonarr
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/onedr0p/sonarr-exporter)](https://hub.docker.com/r/onedr0p/sonarr-exporter)
+
+## Usage
+
+|Name             |Description                                                  |Default|
+|-----------------|-------------------------------------------------------------|-------|
+|`SONARR_HOSTNAME`|You Sonarr instance's URL                                    |       |
+|`SONARR_APIKEY`  |Your Sonarr instance's API Key                               |       |
+|`INTERVAL`       |The duration of which the exporter will scrape the Sonarr API|`2m`   |
+|`PORT`           |The port the exporter will listen on                         |`9811` |
+
+### Docker Compose Example
+
+```yaml
+version: '3.7'
+services:
+  sonarr-exporter:
+    image: onedr0p/sonarr-exporter:v1.0.0
+    environment:
+      SONARR_HOSTNAME: "http://localhost:7878"
+      SONARR_APIKEY: "..."
+      INTERVAL: "1h"
+```
+
+### Metrics
+
 ```bash
 # HELP sonarr_episodes_total Total number of episodes downloaded for all series
 # TYPE sonarr_episodes_total gauge
