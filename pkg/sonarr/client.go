@@ -55,18 +55,27 @@ func (c *Client) Scrape() {
 
 		// Series, Seasons, and Episodes
 		var (
-			totalSeasons  = 0
-			totalEpisodes = 0
+			totalSeasons      = 0
+			totalEpisodes     = 0
+			seriesMonitored   = 0
+			seriesUnmonitored = 0
 		)
 		series := Series{}
 		c.apiRequest(fmt.Sprintf(apiUrlPattern, c.hostname, "series"), &series)
 		for _, s := range series {
+			if s.Monitored {
+				seriesMonitored++
+			} else {
+				seriesUnmonitored++
+			}
 			totalSeasons += s.SeasonCount
 			totalEpisodes += s.EpisodeCount
 		}
 		metrics.Series.WithLabelValues(c.hostname).Set(float64(len(series)))
 		metrics.Seasons.WithLabelValues(c.hostname).Set(float64(totalSeasons))
 		metrics.Episodes.WithLabelValues(c.hostname).Set(float64(totalEpisodes))
+		metrics.SeriesMonitored.WithLabelValues(c.hostname).Set(float64(seriesMonitored))
+		metrics.SeriesUnmonitored.WithLabelValues(c.hostname).Set(float64(seriesUnmonitored))
 
 		// History
 		history := History{}

@@ -38,6 +38,7 @@ type Health []struct {
 
 // Series - Stores struct of JSON response
 type Series []struct {
-	SeasonCount  int `json:"seasonCount"`
-	EpisodeCount int `json:"episodeCount"`
+	Monitored    bool `json:"monitored"`
+	SeasonCount  int  `json:"seasonCount"`
+	EpisodeCount int  `json:"episodeCount"`
 }

@@ -41,6 +41,26 @@ var (
 		[]string{"hostname"},
 	)
 
+	// SeriesMonitored - Total number of Series monitored
+	SeriesMonitored = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "series_monitored_total",
+			Namespace: "sonarr",
+			Help:      "Total number of monitored series",
+		},
+		[]string{"hostname"},
+	)
+
+	// SeriesUnmonitored - Total number of Seriess unmonitored
+	SeriesUnmonitored = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "series_unmonitored_total",
+			Namespace: "sonarr",
+			Help:      "Total number of unmonitored series",
+		},
+		[]string{"hostname"},
+	)
+
 	History = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "history_total",
