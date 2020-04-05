@@ -25,16 +25,17 @@ var (
 
 	Seasons = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "seasons_total",
+			Name:      "season_total",
 			Namespace: "sonarr",
 			Help:      "Total number of seasons for all series",
 		},
 		[]string{"hostname"},
 	)
 
+	// Episodes - Total number of downloaded episodes
 	Episodes = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "episodes_total",
+			Name:      "episode_download_total",
 			Namespace: "sonarr",
 			Help:      "Total number of episodes downloaded for all series",
 		},
@@ -61,6 +62,27 @@ var (
 		[]string{"hostname"},
 	)
 
+	// EpisodeQualities - Total number of Episodes by Quality
+	EpisodeQualities = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "episode_quality_total",
+			Namespace: "sonarr",
+			Help:      "Total number of downloaded episodes by quality",
+		},
+		[]string{"hostname", "quality"},
+	)
+
+	// EpisodeFileSize - Total size of all Episodes
+	EpisodeFileSize = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "episode_bytes",
+			Namespace: "sonarr",
+			Help:      "Total file size of all episodes in bytes",
+		},
+		[]string{"hostname"},
+	)
+
+	// History - Total number of records in History
 	History = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "history_total",
@@ -70,15 +92,17 @@ var (
 		[]string{"hostname"},
 	)
 
+	// Wanted - Total number of missing/wanted Episodes
 	Wanted = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "missing_episodes_total",
+			Name:      "episode_missing_total",
 			Namespace: "sonarr",
 			Help:      "Total number of missing episodes",
 		},
 		[]string{"hostname"},
 	)
 
+	// Queue - Total number of episodes in Queue
 	Queue = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "queue_total",
@@ -88,6 +112,7 @@ var (
 		[]string{"hostname"},
 	)
 
+	// RootFolder - Space by Root Folder
 	RootFolder = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "rootfolder_freespace_bytes",
@@ -97,6 +122,7 @@ var (
 		[]string{"hostname", "folder"},
 	)
 
+	// Health - Amount of health issues by type
 	Health = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "health_issues",
@@ -115,6 +141,8 @@ func Init() {
 	prometheus.MustRegister(Episodes)
 	prometheus.MustRegister(SeriesMonitored)
 	prometheus.MustRegister(SeriesUnmonitored)
+	prometheus.MustRegister(EpisodeFileSize)
+	prometheus.MustRegister(EpisodeQualities)
 	prometheus.MustRegister(History)
 	prometheus.MustRegister(Wanted)
 	prometheus.MustRegister(Queue)

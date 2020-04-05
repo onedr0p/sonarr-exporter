@@ -38,7 +38,20 @@ type Health []struct {
 
 // Series - Stores struct of JSON response
 type Series []struct {
+	Id           int  `json:"id"`
 	Monitored    bool `json:"monitored"`
 	SeasonCount  int  `json:"seasonCount"`
 	EpisodeCount int  `json:"episodeCount"`
+}
+
+type EpisodeFile []struct {
+	Size    int64 `json:"size"`
+	Quality struct {
+		Quality struct {
+			ID         int    `json:"id"`
+			Name       string `json:"name"`
+			Source     string `json:"source"`
+			Resolution int    `json:"resolution"`
+		} `json:"quality"`
+	} `json:"quality"`
 }
