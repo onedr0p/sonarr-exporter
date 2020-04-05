@@ -70,9 +70,9 @@ var (
 
 	RootFolder = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "root_folder_space",
+			Name:      "rootfolder_freespace_bytes",
 			Namespace: "sonarr",
-			Help:      "Root folder space",
+			Help:      "Root folder space in bytes",
 		},
 		[]string{"hostname", "folder"},
 	)
