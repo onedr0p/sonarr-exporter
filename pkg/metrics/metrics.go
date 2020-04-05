@@ -113,6 +113,8 @@ func Init() {
 	prometheus.MustRegister(Series)
 	prometheus.MustRegister(Seasons)
 	prometheus.MustRegister(Episodes)
+	prometheus.MustRegister(SeriesMonitored)
+	prometheus.MustRegister(SeriesUnmonitored)
 	prometheus.MustRegister(History)
 	prometheus.MustRegister(Wanted)
 	prometheus.MustRegister(Queue)
