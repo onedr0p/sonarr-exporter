@@ -80,9 +80,9 @@ sonarr_series_unmonitored_total{hostname="http://localhost:8989"} 585
 # HELP sonarr_system_status System Status
 # TYPE sonarr_system_status gauge
 sonarr_system_status{hostname="http://localhost:8989"} 1
-# HELP sonarr_health_issues Health issues in Sonarr
-# TYPE sonarr_health_issues gauge
-sonarr_health_issues{hostname="http://localhost:8989",message="No download client is available",type="warning",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-download-client-is-available"} 1
-sonarr_health_issues{hostname="http://localhost:8989",message="No indexers available with Automatic Search enabled, Sonarr will not provide any automatic search results",type="warning",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-indexers-available-with-automatic-search-enabled-sonarr-will-not-provide-any-automatic-search-results"} 1
-sonarr_health_issues{hostname="http://localhost:8989",message="No indexers available with RSS sync enabled, Sonarr will not grab new releases automatically",type="error",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-indexers-available-with-rss-sync-enabled-sonarr-will-not-grab-new-releases-automatically"} 1
+# HELP sonarr_system_health_issues Health issues in Sonarr
+# TYPE sonarr_system_health_issues gauge
+sonarr_system_health_issues{hostname="http://localhost:8989",message="No download client is available",type="warning",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-download-client-is-available"} 1
+sonarr_system_health_issues{hostname="http://localhost:8989",message="No indexers available with Automatic Search enabled, Sonarr will not provide any automatic search results",type="warning",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-indexers-available-with-automatic-search-enabled-sonarr-will-not-provide-any-automatic-search-results"} 1
+sonarr_system_health_issues{hostname="http://localhost:8989",message="No indexers available with RSS sync enabled, Sonarr will not grab new releases automatically",type="error",wikiurl="https://github.com/Sonarr/Sonarr/wiki/Health-checks#no-indexers-available-with-rss-sync-enabled-sonarr-will-not-grab-new-releases-automatically"} 1
 ```
