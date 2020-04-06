@@ -2,7 +2,7 @@
 
 Prometheus Exporter for Sonarr
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/onedr0p/sonarr-exporter)](https://hub.docker.com/r/onedr0p/sonarr-exporter)
+[![Docker Pulls](https://img.shields.io/docker/pulls/onedr0p/sonarr-exporter)](https://hub.docker.com/r/onedr0p/sonarr-exporter) [![Go Report Card](https://goreportcard.com/badge/github.com/onedr0p/sonarr-exporter)](https://goreportcard.com/report/github.com/onedr0p/sonarr-exporter)
 
 ## Usage
 
