@@ -117,14 +117,11 @@ func (c *Client) Scrape() {
 		}
 
 		// Health Issues
-		healthIssuesByType := map[string]int{}
+		// Health Issues
 		health := Health{}
 		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "health"), &health)
 		for _, h := range health {
-			healthIssuesByType[h.Type]++
-		}
-		for issueType, count := range healthIssuesByType {
-			metrics.Health.WithLabelValues(c.hostname, issueType).Set(float64(count))
+			metrics.Health.WithLabelValues(c.hostname, h.Type, h.Message, h.WikiURL).Set(float64(1))
 		}
 	}
 }

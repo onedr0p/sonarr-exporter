@@ -122,14 +122,14 @@ var (
 		[]string{"hostname", "folder"},
 	)
 
-	// Health - Amount of health issues by type
+	// Health - Health issues with type and message
 	Health = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "health_issues",
 			Namespace: "sonarr",
-			Help:      "Amount of health issues in Sonarr",
+			Help:      "Health issues in Sonarr",
 		},
-		[]string{"hostname", "type"},
+		[]string{"hostname", "type", "message", "wikiurl"},
 	)
 )
 
