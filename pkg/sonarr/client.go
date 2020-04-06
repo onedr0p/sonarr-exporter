@@ -117,7 +117,6 @@ func (c *Client) Scrape() {
 		}
 
 		// Health Issues
-		// Health Issues
 		health := Health{}
 		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "health"), &health)
 		for _, h := range health {
@@ -133,13 +132,13 @@ func (c *Client) apiRequest(endpoint string, target interface{}) error {
 	// req.Header.Add("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte("")))
 	req.Header.Set("X-Api-Key", c.apiKey)
 	if err != nil {
-		log.Fatal("An error has occured when creating HTTP statistics request", err)
+		log.Fatal("An error has occurred when creating HTTP statistics request", err)
 		return err
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		log.Fatal("An error has occured during retrieving Sonarr statistics", err)
+		log.Fatal("An error has occurred during retrieving Sonarr statistics", err)
 		return err
 	}
 
