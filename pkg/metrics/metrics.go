@@ -5,6 +5,7 @@ import (
 )
 
 var (
+	// Status - System Status
 	Status = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "status",
@@ -14,6 +15,7 @@ var (
 		[]string{"hostname"},
 	)
 
+	// Series - Total number of Series
 	Series = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "series_total",
@@ -23,6 +25,7 @@ var (
 		[]string{"hostname"},
 	)
 
+	// Seasons - Total number of seasons
 	Seasons = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "season_total",

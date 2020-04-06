@@ -44,6 +44,7 @@ type Series []struct {
 	EpisodeCount int  `json:"episodeCount"`
 }
 
+// EpisodeFile - Stores struct of JSON response
 type EpisodeFile []struct {
 	Size    int64 `json:"size"`
 	Quality struct {
