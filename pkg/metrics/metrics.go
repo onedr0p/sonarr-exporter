@@ -110,9 +110,9 @@ var (
 		prometheus.GaugeOpts{
 			Name:      "queue_total",
 			Namespace: "sonarr",
-			Help:      "Total number of episodes in queue",
+			Help:      "Total number of episodes in queue by status",
 		},
-		[]string{"hostname"},
+		[]string{"hostname", "status"},
 	)
 
 	// RootFolder - Space by Root Folder

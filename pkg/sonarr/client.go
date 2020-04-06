@@ -104,10 +104,18 @@ func (c *Client) Scrape() {
 		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "wanted/missing"), &wanted)
 		metrics.Wanted.WithLabelValues(c.hostname).Set(float64(wanted.TotalRecords))
 
-		// Queue
+		// Queue by Status
+		var queueStatus = map[string]int{}
 		queue := Queue{}
 		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "queue"), &queue)
-		metrics.Queue.WithLabelValues(c.hostname).Set(float64(len(queue)))
+		for _, s := range queue {
+			if s.TrackedDownloadStatus != "" {
+				queueStatus[s.TrackedDownloadStatus]++
+			}
+		}
+		for trackedDownloadStatus, count := range queueStatus {
+			metrics.Queue.WithLabelValues(c.hostname, trackedDownloadStatus).Set(float64(count))
+		}
 
 		// Root Folder
 		rootFolders := RootFolder{}

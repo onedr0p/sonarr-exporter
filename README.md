@@ -21,7 +21,7 @@ services:
   sonarr-exporter:
     image: onedr0p/sonarr-exporter:v1.0.0
     environment:
-      SONARR_HOSTNAME: "http://localhost:7878"
+      SONARR_HOSTNAME: "http://localhost:8989"
       SONARR_APIKEY: "..."
       INTERVAL: "1h"
 ```
@@ -68,6 +68,10 @@ sonarr_rootfolder_freespace_bytes{folder="/media/Library/Television/",hostname="
 # HELP sonarr_season_total Total number of seasons for all series
 # TYPE sonarr_season_total gauge
 sonarr_season_total{hostname="http://localhost:8989"} 3472
+# HELP sonarr_queue_total Total number of episodes in queue by status
+# TYPE sonarr_queue_total gauge
+sonarr_queue_total{hostname="http://localhost:8989",status="Ok"} 1
+sonarr_queue_total{hostname="http://localhost:8989",status="Warning"} 9
 # HELP sonarr_series_monitored_total Total number of monitored series
 # TYPE sonarr_series_monitored_total gauge
 sonarr_series_monitored_total{hostname="http://localhost:8989"} 308
