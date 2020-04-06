@@ -40,13 +40,13 @@ func (c *Client) Scrape() {
 		// System Status
 		status := SystemStatus{}
 		if err := c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "system/status"), &status); err != nil {
-			metrics.Status.WithLabelValues(c.hostname).Set(0.0)
+			metrics.SystemStatus.WithLabelValues(c.hostname).Set(0.0)
 			return
 		} else if (SystemStatus{}) == status {
-			metrics.Status.WithLabelValues(c.hostname).Set(0.0)
+			metrics.SystemStatus.WithLabelValues(c.hostname).Set(0.0)
 			return
 		} else {
-			metrics.Status.WithLabelValues(c.hostname).Set(1.0)
+			metrics.SystemStatus.WithLabelValues(c.hostname).Set(1.0)
 		}
 
 		// Series, Seasons, and Episodes
