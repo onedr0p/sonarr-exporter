@@ -14,15 +14,26 @@ type SystemStatus struct {
 }
 
 // Queue - Stores struct of JSON response
-type Queue []struct {
-	Title                 string `json:"title"`
-	Size                  int32  `json:"size"`
-	Status                string `json:"status"`
-	TrackedDownloadStatus string `json:"trackedDownloadStatus"`
+type Queue struct {
+	Page          int            `json:"page"`
+	PageSize      int            `json:"pageSize"`
+	SortKey       string         `json:"sortKey"`
+	SortDirection string         `json:"sortDirection"`
+	TotalRecords  int            `json:"totalRecords"`
+	Records       []QueueRecords `json:"records"`
+}
+
+type QueueRecords struct {
+	Size                  float64 `json:"size"`
+	Title                 string  `json:"title"`
+	Status                string  `json:"status"`
+	TrackedDownloadStatus string  `json:"trackedDownloadStatus"`
+	TrackedDownloadState  string  `json:"trackedDownloadState"`
 	StatusMessages        []struct {
 		Title    string   `json:"title"`
 		Messages []string `json:"messages"`
 	} `json:"statusMessages"`
+	ErrorMessage string `json:"errorMessage"`
 }
 
 // History - Stores struct of JSON response
@@ -35,8 +46,8 @@ type WantedMissing struct {
 	TotalRecords int `json:"totalRecords"`
 }
 
-// Health - Stores struct of JSON response
-type Health []struct {
+// SystemHealth - Stores struct of JSON response
+type SystemHealth []struct {
 	Source  string `json:"source"`
 	Type    string `json:"type"`
 	Message string `json:"message"`
@@ -45,10 +56,15 @@ type Health []struct {
 
 // Series - Stores struct of JSON response
 type Series []struct {
-	Id           int  `json:"id"`
-	Monitored    bool `json:"monitored"`
-	SeasonCount  int  `json:"seasonCount"`
-	EpisodeCount int  `json:"episodeCount"`
+	Id         int  `json:"id"`
+	Monitored  bool `json:"monitored"`
+	Statistics struct {
+		SeasonCount       int   `json:"seasonCount"`
+		EpisodeFileCount  int   `json:"episodeFileCount"`
+		EpisodeCount      int   `json:"episodeCount"`
+		TotalEpisodeCount int   `json:"totalEpisodeCount"`
+		SizeOnDisk        int64 `json:"sizeOnDisk"`
+	} `json:"statistics"`
 }
 
 // EpisodeFile - Stores struct of JSON response

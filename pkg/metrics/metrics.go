@@ -5,10 +5,10 @@ import (
 )
 
 var (
-	// Status - System Status
-	Status = prometheus.NewGaugeVec(
+	// SystemStatus - System Status
+	SystemStatus = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "status",
+			Name:      "system_status",
 			Namespace: "sonarr",
 			Help:      "System Status",
 		},
@@ -45,8 +45,8 @@ var (
 		[]string{"hostname"},
 	)
 
-	// SeriesMonitored - Total number of Series monitored
-	SeriesMonitored = prometheus.NewGaugeVec(
+	// Monitored - Total number of Series monitored
+	Monitored = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "series_monitored_total",
 			Namespace: "sonarr",
@@ -55,8 +55,8 @@ var (
 		[]string{"hostname"},
 	)
 
-	// SeriesUnmonitored - Total number of Seriess unmonitored
-	SeriesUnmonitored = prometheus.NewGaugeVec(
+	// Unmonitored - Total number of Seriess unmonitored
+	Unmonitored = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "series_unmonitored_total",
 			Namespace: "sonarr",
@@ -65,8 +65,8 @@ var (
 		[]string{"hostname"},
 	)
 
-	// EpisodeQualities - Total number of Episodes by Quality
-	EpisodeQualities = prometheus.NewGaugeVec(
+	// Qualities - Total number of Episodes by Quality
+	Qualities = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "episode_quality_total",
 			Namespace: "sonarr",
@@ -75,12 +75,12 @@ var (
 		[]string{"hostname", "quality"},
 	)
 
-	// EpisodeFileSize - Total size of all Episodes
-	EpisodeFileSize = prometheus.NewGaugeVec(
+	// FileSize - Total size of all Series
+	FileSize = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "episode_bytes",
 			Namespace: "sonarr",
-			Help:      "Total file size of all episodes in bytes",
+			Help:      "Total filesize of all series in bytes",
 		},
 		[]string{"hostname"},
 	)
@@ -110,9 +110,9 @@ var (
 		prometheus.GaugeOpts{
 			Name:      "queue_total",
 			Namespace: "sonarr",
-			Help:      "Total number of episodes in queue by status",
+			Help:      "Total number of episodes in queue",
 		},
-		[]string{"hostname", "status"},
+		[]string{"hostname", "status", "download_status", "download_state"},
 	)
 
 	// RootFolder - Space by Root Folder
@@ -125,12 +125,12 @@ var (
 		[]string{"hostname", "folder"},
 	)
 
-	// Health - Health issues with type and message
-	Health = prometheus.NewGaugeVec(
+	// SystemHealth - System Health issues
+	SystemHealth = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "health_issues",
+			Name:      "system_health_issues",
 			Namespace: "sonarr",
-			Help:      "Health issues in Sonarr",
+			Help:      "System Health issues in Sonarr",
 		},
 		[]string{"hostname", "type", "message", "wikiurl"},
 	)
@@ -138,17 +138,17 @@ var (
 
 // Init initializes all Prometheus metrics made available by Sonarr Exporter.
 func Init() {
-	prometheus.MustRegister(Status)
+	prometheus.MustRegister(SystemStatus)
 	prometheus.MustRegister(Series)
 	prometheus.MustRegister(Seasons)
 	prometheus.MustRegister(Episodes)
-	prometheus.MustRegister(SeriesMonitored)
-	prometheus.MustRegister(SeriesUnmonitored)
-	prometheus.MustRegister(EpisodeFileSize)
-	prometheus.MustRegister(EpisodeQualities)
+	prometheus.MustRegister(Monitored)
+	prometheus.MustRegister(Unmonitored)
+	prometheus.MustRegister(FileSize)
+	prometheus.MustRegister(Qualities)
 	prometheus.MustRegister(History)
 	prometheus.MustRegister(Wanted)
 	prometheus.MustRegister(Queue)
 	prometheus.MustRegister(RootFolder)
-	prometheus.MustRegister(Health)
+	prometheus.MustRegister(SystemHealth)
 }
