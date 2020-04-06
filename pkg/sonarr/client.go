@@ -39,7 +39,7 @@ func (c *Client) Scrape() {
 
 		// System Status
 		status := SystemStatus{}
-		if err := c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "system/status"), &status); err != nil {
+		if err := c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "system/status"), &status); err != nil {
 			metrics.Status.WithLabelValues(c.hostname).Set(0.0)
 			return
 		} else if (SystemStatus{}) == status {
@@ -60,7 +60,7 @@ func (c *Client) Scrape() {
 			episodeQualities  = map[string]int{}
 		)
 		series := Series{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "series"), &series)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "series"), &series)
 		for _, s := range series {
 			if s.Monitored {
 				seriesMonitored++
@@ -72,7 +72,7 @@ func (c *Client) Scrape() {
 
 			// Get Episode Qualities
 			episodeFile := EpisodeFile{}
-			c.apiRequest(fmt.Sprintf("%s/api/%s?seriesId=%d", c.hostname, "episodefile", s.Id), &episodeFile)
+			c.apiRequest(fmt.Sprintf("%s/api/v3/%s?seriesId=%d", c.hostname, "episodefile", s.Id), &episodeFile)
 			for _, e := range episodeFile {
 				if e.Quality.Quality.Name != "" {
 					episodeQualities[e.Quality.Quality.Name]++
@@ -96,18 +96,18 @@ func (c *Client) Scrape() {
 
 		// History
 		history := History{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "history"), &history)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "history"), &history)
 		metrics.History.WithLabelValues(c.hostname).Set(float64(history.TotalRecords))
 
 		// Wanted
 		wanted := WantedMissing{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "wanted/missing"), &wanted)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "wanted/missing"), &wanted)
 		metrics.Wanted.WithLabelValues(c.hostname).Set(float64(wanted.TotalRecords))
 
 		// Queue by Status
 		var queueStatus = map[string]int{}
 		queue := Queue{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "queue"), &queue)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "queue"), &queue)
 		for _, s := range queue {
 			if s.TrackedDownloadStatus != "" {
 				queueStatus[s.TrackedDownloadStatus]++
@@ -119,16 +119,16 @@ func (c *Client) Scrape() {
 
 		// Root Folder
 		rootFolders := RootFolder{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "rootfolder"), &rootFolders)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "rootfolder"), &rootFolders)
 		for _, rootFolder := range rootFolders {
 			metrics.RootFolder.WithLabelValues(c.hostname, rootFolder.Path).Set(float64(rootFolder.FreeSpace))
 		}
 
 		// Health Issues
 		health := Health{}
-		c.apiRequest(fmt.Sprintf("%s/api/%s", c.hostname, "health"), &health)
+		c.apiRequest(fmt.Sprintf("%s/api/v3/%s", c.hostname, "health"), &health)
 		for _, h := range health {
-			metrics.Health.WithLabelValues(c.hostname, h.Type, h.Message, h.WikiURL).Set(float64(1))
+			metrics.Health.WithLabelValues(c.hostname, h.Source, h.Type, h.Message, h.WikiURL).Set(float64(1))
 		}
 	}
 }
