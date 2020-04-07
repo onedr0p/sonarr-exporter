@@ -12,7 +12,7 @@ Prometheus Exporter for Sonarr
 |`SONARR_APIKEY`  |Your Sonarr instance's API Key                               |       |
 |`INTERVAL`       |The duration of which the exporter will call the Sonarr API  |`10m`  |
 |`PORT`           |The port the exporter will listen on                         |`9811` |
-|`STARTUP_DEPLY`  |The duration to wait before first calling the Sonarr API     |       |
+|`STARTUP_DELAY`  |The duration to wait before first calling the Sonarr API     |       |
 
 ### Docker Compose Example
 
