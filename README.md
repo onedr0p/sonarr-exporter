@@ -29,6 +29,8 @@ services:
 
 ### Metrics
 
+> **Note:** Due to changes in versions, these may not reflect what is currently being exported.
+
 ```bash
 # HELP sonarr_episode_bytes Total filesize of all series in bytes
 # TYPE sonarr_episode_bytes gauge
