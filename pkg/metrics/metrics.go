@@ -132,7 +132,7 @@ var (
 			Namespace: "sonarr",
 			Help:      "System Health issues in Sonarr",
 		},
-		[]string{"hostname", "type", "message", "wikiurl"},
+		[]string{"hostname", "source", "type", "message", "wikiurl"},
 	)
 )
 
